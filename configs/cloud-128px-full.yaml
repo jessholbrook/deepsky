@@ -1,0 +1,22 @@
+# The real run: single RTX 4090, ~16-24h. See cloud/README.md for the runbook.
+model:
+  base_channels: 128
+  channel_mults: [1, 2, 3, 4]
+  num_res_blocks: 2
+  attn_resolutions: [16, 8]
+  time_emb_dim: 512
+data:
+  image_size: 128
+  num_workers: 8
+train:
+  batch_size: 64
+  lr: 1.0e-4
+  warmup_steps: 5000
+  lr_decay: cosine
+  lr_min: 1.0e-5
+  total_steps: 200000
+  ema_decay: 0.9999
+  amp: true
+  run_dir: runs/cloud128
+  checkpoint_every: 5000
+  sample_every: 5000

@@ -1,0 +1,22 @@
+# Overnight validation run on the Mac mini (MPS).
+# Before committing to the full 75k steps, time 200 steps and scale
+# total_steps to fit the night (see README).
+model:
+  base_channels: 64
+  channel_mults: [1, 2, 2, 4]
+  num_res_blocks: 2
+  attn_resolutions: [16, 8]
+  time_emb_dim: 256
+data:
+  image_size: 64
+  num_workers: 4
+train:
+  batch_size: 64          # drop to 48 on a 16 GB machine if you hit memory pressure
+  lr: 2.0e-4
+  warmup_steps: 1000
+  total_steps: 75000
+  ema_decay: 0.999
+  amp: false              # MPS autocast is flaky; keep fp32
+  run_dir: runs/mac64
+  checkpoint_every: 5000
+  sample_every: 5000

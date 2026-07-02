@@ -1,0 +1,22 @@
+# Tiny end-to-end run: verifies the full pipeline on CPU in a few minutes.
+model:
+  base_channels: 32
+  channel_mults: [1, 2]
+  num_res_blocks: 1
+  attn_resolutions: [8]
+  time_emb_dim: 128
+diffusion:
+  timesteps: 100
+data:
+  image_size: 32
+  num_workers: 0
+train:
+  batch_size: 8
+  total_steps: 200
+  warmup_steps: 10
+  checkpoint_every: 100
+  sample_every: 100
+  sample_count: 8
+  sample_ddim_steps: 10
+  log_every: 10
+  run_dir: runs/smoke

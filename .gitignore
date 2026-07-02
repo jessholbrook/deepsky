@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+data/
+runs/
+*.pt
+*.tar
+.pytest_cache/
+.DS_Store
