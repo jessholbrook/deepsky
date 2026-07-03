@@ -29,6 +29,7 @@ uv run python scripts/download_all.py            # → data/raw/{source}/, resum
 uv run python scripts/build_dataset.py           # dedup + derive 256px crops → data/crops256/
 uv run python scripts/scrape_image_types.py      # AVM Type per ESA/ESO image (~45 min)
 uv run python scripts/prune_non_observations.py --apply   # drop chart/simulation/collage crops
+uv run python scripts/prune_bright_and_spectra.py --apply  # drop plot-like crops the type field misses
 ```
 
 ## 2. Validate on the Mac mini

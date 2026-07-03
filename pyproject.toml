@@ -19,6 +19,9 @@ dependencies = [
 ]
 
 [dependency-groups]
+curation = [
+    "open-clip-torch>=3.3.0",
+]
 dev = ["pytest>=8.0"]
 
 [build-system]
