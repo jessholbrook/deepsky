@@ -30,11 +30,14 @@ ATTEMPTS_PER_ACCEPTED = 8  # sampling budget: attempts = cap * this
 # Informativeness thresholds on [0, 255] grayscale.
 MIN_STD = 12.0
 MIN_MEAN = 4.0
+# Plots/diagrams have paper-white backgrounds (median 255); the brightest real
+# crops (dense globular-cluster cores) measure ~247.
+MAX_MEDIAN = 250.0
 
 
 def crop_is_informative(arr: np.ndarray) -> bool:
     gray = arr.mean(axis=2)
-    return gray.std() >= MIN_STD and gray.mean() >= MIN_MEAN
+    return gray.std() >= MIN_STD and gray.mean() >= MIN_MEAN and np.median(gray) < MAX_MEDIAN
 
 
 def extract_crops(path: Path, rng: random.Random) -> list[np.ndarray]:

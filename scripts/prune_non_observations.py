@@ -32,7 +32,9 @@ def main():
     keep_rows, drop_rows = [], []
     for row in rows:
         image_type = types.get(row["source_key"])
-        if image_type is None or image_type in KEEP_TYPES:  # None = NASA
+        # None = NASA (no type pages). " : " = object taxonomy leaked in because
+        # the page has no image-type row at all — those are ordinary photos.
+        if image_type is None or image_type in KEEP_TYPES or " : " in image_type:
             keep_rows.append(row)
         else:
             drop_rows.append(row)

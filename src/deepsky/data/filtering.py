@@ -11,7 +11,8 @@ TITLE_BLACKLIST = re.compile(
     r"artist|impression|illustration|annotat|comparison|chart|diagram|logo|"
     r"screenshot|infographic|graphic|composite sketch|drawing|animation still|"
     r"spacecraft|telescope|mirror|instrument|launch|cleanroom|clean room|"
-    r"ground-based view|wide-field view of the sky around",  # ESO finder charts
+    r"ground-based view|wide-field view of the sky around|"  # ESO finder charts
+    r"\bspectr|light curve",  # spectra/spectrograms are plots, not photos
     re.IGNORECASE,
 )
 

@@ -17,7 +17,10 @@ from tqdm import tqdm
 
 from deepsky.data.d2d_client import SOURCES, _get
 
-TYPE_RE = re.compile(r"Type:</t[hd]>\s*<td>([^<]+)<")
+# "About the Image" table row. esahubble/eso render `Type:</th><td>X`,
+# esawebb spreads it over lines: `Type: </th> <td colspan="2"> X `.
+# Only the FIRST Type row is the image type (later ones describe the object).
+TYPE_RE = re.compile(r"Type:\s*</t[hd]>\s*<td[^>]*>\s*([^<]+?)\s*<")
 OUT = Path("data/raw/image_types.json")
 
 
