@@ -25,8 +25,10 @@ uv run pytest          # fast suite, ~30s
 ## 1. Build the dataset (once, ~hours of downloading)
 
 ```bash
-uv run python scripts/download_all.py     # → data/raw/{source}/, resumable
-uv run python scripts/build_dataset.py    # dedup + derive 256px crops → data/crops256/
+uv run python scripts/download_all.py            # → data/raw/{source}/, resumable
+uv run python scripts/build_dataset.py           # dedup + derive 256px crops → data/crops256/
+uv run python scripts/scrape_image_types.py      # AVM Type per ESA/ESO image (~45 min)
+uv run python scripts/prune_non_observations.py --apply   # drop chart/simulation/collage crops
 ```
 
 ## 2. Validate on the Mac mini
