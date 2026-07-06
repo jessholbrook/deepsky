@@ -11,10 +11,10 @@ data:
   image_size: 64
   num_workers: 4
 train:
-  batch_size: 64          # drop to 48 on a 16 GB machine if you hit memory pressure
+  batch_size: 48          # 48 on this 16 GB mini (batch 64 ran but swapped ~3 GB)
   lr: 2.0e-4
   warmup_steps: 1000
-  total_steps: 75000
+  total_steps: 20000      # ~0.47 it/s on M4 -> fits an overnight run; constant LR
   ema_decay: 0.999
   amp: false              # MPS autocast is flaky; keep fp32
   run_dir: runs/mac64
