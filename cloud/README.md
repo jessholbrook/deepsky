@@ -18,7 +18,7 @@ Budget expectation: 200k steps at 128px ≈ 16–24 h ≈ **$8–20** at $0.40�
 ## On the pod
 
 ```bash
-git clone <your repo> && cd diffustion
+git clone https://github.com/jessholbrook/deepsky.git && cd deepsky
 bash cloud/setup.sh                       # installs uv, syncs deps, pulls data
 uv run pytest                             # ~1 min; abort if anything fails
 ```

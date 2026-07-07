@@ -41,14 +41,23 @@ def ddim_sample(
     device: torch.device,
     steps: int = 100,
     progress: bool = True,
+    x_start: torch.Tensor | None = None,
+    t_start: int | None = None,
 ) -> torch.Tensor:
+    """Deterministic DDIM (eta=0) sampling.
+
+    By default starts from pure noise at t=T-1. Pass ``x_start`` (a batch already
+    noised to timestep ``t_start``) to resume the reverse process partway — e.g.
+    SDEdit-style editing, or reconstructing a known latent.
+    """
     s = diffusion.schedule
     T = diffusion.timesteps
+    t_hi = T - 1 if t_start is None else t_start
     # Evenly spaced subsequence of timesteps, descending, always ending at 0.
-    ts = torch.linspace(T - 1, 0, steps).round().long().tolist()
+    ts = torch.linspace(t_hi, 0, steps).round().long().tolist()
     ts = sorted(set(ts), reverse=True)
 
-    x = torch.randn(shape, device=device)
+    x = torch.randn(shape, device=device) if x_start is None else x_start
     pairs = list(zip(ts, ts[1:] + [-1]))
     if progress:
         pairs = tqdm(pairs, desc="ddim", leave=False)
