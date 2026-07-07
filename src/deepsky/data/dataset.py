@@ -18,7 +18,12 @@ from torch.utils.data import Dataset
 
 class CropDataset(Dataset):
     def __init__(self, crops_dir: str | Path, image_size: int, seed: int = 0):
-        self.files = sorted(Path(crops_dir).glob("*.webp"))
+        # Exclude AppleDouble companions (._foo.webp) that macOS tar/AirDrop/rsync
+        # leave beside real files — the *.webp glob would otherwise match them and
+        # PIL would choke trying to open the metadata blob.
+        self.files = sorted(
+            p for p in Path(crops_dir).glob("*.webp") if not p.name.startswith("._")
+        )
         if not self.files:
             raise FileNotFoundError(f"No .webp crops in {crops_dir} — run scripts/build_dataset.py")
         self.image_size = image_size
