@@ -16,7 +16,10 @@ mkdir -p data
 curl -L "$DATA_URL" -o /tmp/crops256.tar
 tar xf /tmp/crops256.tar -C data
 rm /tmp/crops256.tar
-echo "crops: $(ls data/crops256 | wc -l)"
+# macOS tar embeds AppleDouble (._*) companion files; strip them so the dataset
+# loader's *.webp glob doesn't try to open metadata blobs.
+find data/crops256 -name '._*' -delete
+echo "crops: $(find data/crops256 -name '*.webp' | wc -l)"
 
 uv run python -c "import torch; assert torch.cuda.is_available(), 'NO CUDA'; print(torch.cuda.get_device_name(0))"
 echo "ready. next: uv run pytest && uv run python scripts/train.py --config configs/cloud-128px-full.yaml"
