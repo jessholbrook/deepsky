@@ -1,0 +1,3 @@
+gradio
+huggingface_hub
+git+https://github.com/jessholbrook/deepsky.git
