@@ -4,6 +4,9 @@ A from-scratch denoising diffusion model (DDPM) that generates deep-sky
 astronomical images — nebulae, galaxies, star clusters — trained on public
 imagery from ESA/Hubble, ESA/Webb, ESO, and NASA.
 
+**▶ [Try it live](https://huggingface.co/spaces/jessholbrook/deepsky)** ·
+[Model weights](https://huggingface.co/jessholbrook/deepsky-128px)
+
 ![Generated samples](assets/hero.png)
 
 *Uncurated 128 px samples from the trained model. Every pixel is generated — no
